@@ -11,11 +11,10 @@
   (texmacs->verbatim x (acons "texmacs->verbatim:encoding" "SourceCode" '())))
 
 (define (cpp->texmacs x . opts)
-  (verbatim->texmacs x (acons "verbatim->texmacs:encoding" "SourceCode" '())))
+  (code->texmacs x))
 
 (define (cpp-snippet->texmacs x . opts)
-  (verbatim-snippet->texmacs x 
-    (acons "verbatim->texmacs:encoding" "SourceCode" '())))
+  (code-snippet->texmacs x))
 
 (converter texmacs-tree cpp-document
   (:function texmacs->cpp))
@@ -42,11 +41,10 @@
   (texmacs->verbatim x (acons "texmacs->verbatim:encoding" "SourceCode" '())))
 
 (define (julia->texmacs x . opts)
-  (verbatim->texmacs x (acons "verbatim->texmacs:encoding" "SourceCode" '())))
+  (code->texmacs x))
 
 (define (julia-snippet->texmacs x . opts)
-  (verbatim-snippet->texmacs x 
-    (acons "verbatim->texmacs:encoding" "SourceCode" '())))
+  (code-snippet->texmacs x))
 
 (converter texmacs-tree julia-document
   (:function texmacs->julia))
@@ -73,11 +71,10 @@
   (texmacs->verbatim x (acons "texmacs->verbatim:encoding" "SourceCode" '())))
 
 (define (java->texmacs x . opts)
-  (verbatim->texmacs x (acons "verbatim->texmacs:encoding" "SourceCode" '())))
+  (code->texmacs x))
 
 (define (java-snippet->texmacs x . opts)
-  (verbatim-snippet->texmacs x 
-    (acons "verbatim->texmacs:encoding" "SourceCode" '())))
+  (code-snippet->texmacs x))
 
 (converter texmacs-tree java-document
   (:function texmacs->java))
@@ -98,17 +95,16 @@
 
 (define-format scala
   (:name "Scala Source Code")
-  (:suffix "scala"))
+  (:suffix "scala" "sc" "sbt"))
 
 (define (texmacs->scala x . opts)
   (texmacs->verbatim x (acons "texmacs->verbatim:encoding" "SourceCode" '())))
 
 (define (scala->texmacs x . opts)
-  (verbatim->texmacs x (acons "verbatim->texmacs:encoding" "SourceCode" '())))
+  (code->texmacs x))
 
 (define (scala-snippet->texmacs x . opts)
-  (verbatim-snippet->texmacs x 
-    (acons "verbatim->texmacs:encoding" "SourceCode" '())))
+  (code-snippet->texmacs x))
 
 (converter texmacs-tree scala-document
   (:function texmacs->scala))
@@ -122,3 +118,62 @@
 (converter scala-snippet texmacs-tree
   (:function scala-snippet->texmacs))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; JSON source files
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define-format json
+  (:name "JSON")
+  (:suffix "json"))
+
+(define (texmacs->json x . opts)
+  (texmacs->verbatim x (acons "texmacs->verbatim:encoding" "SourceCode" '())))
+
+(define (json->texmacs x . opts)
+  (code->texmacs x))
+
+(define (json-snippet->texmacs x . opts)
+  (code-snippet->texmacs x))
+
+(converter texmacs-tree json-document
+  (:function texmacs->json))
+
+(converter json-document texmacs-tree
+  (:function json->texmacs))
+  
+(converter texmacs-tree json-snippet
+  (:function texmacs->json))
+
+(converter json-snippet texmacs-tree
+  (:function json-snippet->texmacs))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; CSV source files
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define-format csv
+  (:name "CSV")
+  (:suffix "csv"))
+
+(define (texmacs->csv x . opts)
+  (texmacs->verbatim x (acons "texmacs->verbatim:encoding" "SourceCode" '())))
+
+(define (csv->texmacs x . opts)
+  (code->texmacs x))
+
+(define (csv-snippet->texmacs x . opts)
+  (code-snippet->texmacs x))
+
+(converter texmacs-tree csv-document
+  (:function texmacs->csv))
+
+(converter csv-document texmacs-tree
+  (:function csv->texmacs))
+  
+(converter texmacs-tree csv-snippet
+  (:function texmacs->csv))
+
+(converter csv-snippet texmacs-tree
+  (:function csv-snippet->texmacs))
